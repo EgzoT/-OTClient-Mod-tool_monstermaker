@@ -4,6 +4,9 @@ Create monsters for [The Forgotten Server](https://github.com/otland/forgottense
 # How to add?
 Add folder [tool_monstermaker] to "mods" or "modules" folder (recommended "mods" folder) in your main OTClient folder.
 
+# Official thread
+[![OTLand](https://otland.net/styles/fracture/xenforo/xenFracture-logo.png)](https://otland.net/threads/otclient-mod-tool-monstermaker.261322/)
+
 # How it's look like
 ![1](https://dl.getdropbox.com/s/rvyadhy57nurzm5/tools_monstermaker_1.png)
 ![2](https://dl.getdropbox.com/s/v2wnqf55z1dw1w5/tools_monstermaker_2.png)
@@ -25,10 +28,10 @@ Add folder [tool_monstermaker] to "mods" or "modules" folder (recommended "mods"
   * Set monster Attacks
   * Set monster Defences
   * Set monster Elements
-  * Set monsters Immunities
-  * Set monsters Summons
-  * Set monsters Voices
-  * Set monsters Loot
+  * Set monster Immunities
+  * Set monster Summons
+  * Set monster Voices
+  * Set monster Loot
 * Fast monster outfit preview
 * Generate monster XML files
 * Generate link for monsters.xml
@@ -38,3 +41,8 @@ Add folder [tool_monstermaker] to "mods" or "modules" folder (recommended "mods"
 * Problem with some outfit id who cause client crash.
 * This version may not 100% work properly.
 * It may not support all monster features.
+
+# Credits
+**Moj mistrz** for this tutorial:
+
+[How to make a monster?](https://otland.net/threads/xml-how-to-make-a-monster-fully-explained-new.235454/#post-2272138)
