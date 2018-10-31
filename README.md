@@ -17,7 +17,7 @@ Add folder [tool_monstermaker] to "mods" or "modules" folder (recommended "mods"
 ![10](https://dl.getdropbox.com/s/5eqmp2x46gol50f/tools_monstermaker_10.png)
 ![11](https://dl.getdropbox.com/s/n9cpwoa8bmo947i/tools_monstermaker_11.png)
 
-Features
+# Features
 * Easy to use monster creator with UI interface including:
   * Set monster general information
   * Set monster Flags
@@ -34,7 +34,7 @@ Features
 * Generate link for monsters.xml
 * Load monsters data from XML files (parse XML monster file)
 
-Limitations
+# Limitations
 * Problem with some outfit id who cause client crash.
 * This version may not 100% work properly.
 * It may not support all monster features.
