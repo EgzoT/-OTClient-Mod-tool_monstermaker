@@ -1,0 +1,297 @@
+Panel
+  Label
+    id: armorLabel
+    width: 60
+    !text: tr('Armor')
+    phantom: false
+    !tooltip: tr('Values which will reduce incoming physical damage.')
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 8
+
+  SpinBox
+    id: armorText
+    width: 60
+    anchors.left: armorLabel.right
+    anchors.top: parent.top
+    margin-top: 5
+    minimum: 1
+    maximum: 99999999999
+    focusable: true
+    buttons: true
+
+  Label
+    id: defenseLabel
+    width: 60
+    !text: tr('Defense')
+    phantom: false
+    !tooltip: tr('Reduce incoming physical damage.')
+    anchors.left: armorText.right
+    anchors.top: parent.top
+    margin-top: 8
+    margin-left: 8
+
+  SpinBox
+    id: defenseText
+    width: 60
+    anchors.left: defenseLabel.right
+    anchors.top: parent.top
+    margin-top: 5
+    minimum: 1
+    maximum: 99999999999
+    focusable: true
+    buttons: true
+
+  TextList
+    id: defenseslistTextList
+    anchors.top: defenseText.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 5
+    vertical-scrollbar: defensesMultilineTextScroll
+    focusable: false
+    phantom: true
+    auto-focus: first
+    height: 145
+
+  VerticalScrollBar
+    id: defensesMultilineTextScroll
+    anchors.top: defenseslistTextList.top
+    anchors.bottom: defenseslistTextList.bottom
+    anchors.right: defenseslistTextList.right
+    step: 16
+    pixels-scroll: true
+
+  Label
+    id: defenseNameLabel
+    width: 120
+    !text: tr('Defense name')
+    phantom: false
+    !tooltip: tr('Choose defense type.')
+    anchors.left: parent.left
+    anchors.top: defenseslistTextList.bottom
+    margin-top: 8
+
+  ComboBox
+    id: defenseComboBox
+    width: 120
+    anchors.left: defenseNameLabel.right
+    anchors.top: defenseslistTextList.bottom
+    margin-top: 5
+    mouse-scroll: false
+    @onTextChange: changeDefenseType(self:getText())
+
+  Label
+    id: intervalLabel
+    width: 120
+    !text: tr('Interval')
+    phantom: false
+    !tooltip: tr('It\'s how often the spell will be cast - 2000 = 2seconds.')
+    anchors.left: parent.left
+    anchors.top: defenseComboBox.bottom
+    margin-top: 8
+
+  SpinBox
+    id: intervalText
+    width: 120
+    anchors.left: intervalLabel.right
+    anchors.top: defenseComboBox.bottom
+    margin-top: 5
+    minimum: 1000
+    maximum: 99999999999
+    focusable: true
+    buttons: true
+
+  Label
+    id: chanceLabel
+    width: 120
+    !text: tr('Chance')
+    phantom: false
+    !tooltip: tr('It\'s the chance to cast the spell successfully (in %%).')
+    anchors.left: parent.left
+    anchors.top: intervalText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: chanceText
+    width: 120
+    anchors.left: chanceLabel.right
+    anchors.top: intervalText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 100
+    focusable: true
+    buttons: true
+
+  //Healing
+
+  Label
+    id: minLabel
+    width: 40
+    !text: tr('Min')
+    phantom: false
+    !tooltip: tr('Minimum heal points.')
+    anchors.left: parent.left
+    anchors.top: chanceText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: minText
+    width: 100
+    anchors.left: minLabel.right
+    anchors.top: chanceText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 999999999999
+    focusable: true
+    buttons: true
+
+  Label
+    id: maxLabel
+    width: 40
+    !text: tr('Max')
+    phantom: false
+    !tooltip: tr('Maximum heal points.')
+    anchors.left: minText.right
+    anchors.top: chanceText.bottom
+    margin-top: 8
+    margin-left: 10
+
+  SpinBox
+    id: maxText
+    width: 100
+    anchors.left: maxLabel.right
+    anchors.top: chanceText.bottom
+    margin-top: 5
+    magin-right: 5
+    minimum: 1
+    maximum: 999999999999
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: radiusCheckBox
+    text: Radius
+    phantom: false
+    !tooltip: tr('Size of spell area.')
+    anchors.left: parent.left
+    anchors.top: maxText.bottom
+    width:80
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.defensesRadius:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.defensesRadius:setEnabled(false)
+      end
+
+  SpinBox
+    id: radiusText
+    width: 40
+    anchors.left: radiusCheckBox.right
+    anchors.top: maxText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 9
+    focusable: true
+    buttons: true
+
+  Label
+    id: areaEffectLabel
+    width: 120
+    !text: tr('Area Effect')
+    phantom: false
+    !tooltip: tr('Choose area effect for spell.')
+    anchors.left: parent.left
+    anchors.top: radiusText.bottom
+    margin-top: 8
+
+  ComboBox
+    id: areaEffectComboBox
+    width: 120
+    anchors.left: areaEffectLabel.right
+    anchors.top: radiusText.bottom
+    margin-top: 5
+    mouse-scroll: true
+    menu-scroll: true
+    menu-height: 300
+    menu-scroll-step: 10
+
+  Label
+    id: durationLabel
+    width: 120
+    !text: tr('Duration')
+    phantom: false
+    !tooltip: tr('How long it lasts.')
+    anchors.left: parent.left
+    anchors.top: areaEffectComboBox.bottom
+    margin-top: 8
+
+  SpinBox
+    id: durationText
+    width: 120
+    anchors.left: durationLabel.right
+    anchors.top: areaEffectComboBox.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 9999999999999
+    focusable: true
+    buttons: true
+
+  Label
+    id: speedchangeLabel
+    width: 120
+    !text: tr('Speed change')
+    phantom: false
+    !tooltip: tr('Starting from monsterBaseSpeed+numbers, so if monsterBaseSpeed is 200 then put more than 200 in order to have results.')
+    anchors.left: parent.left
+    anchors.top: durationText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: speedchangeText
+    width: 120
+    anchors.left: speedchangeLabel.right
+    anchors.top: durationText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 9999999999999
+    focusable: true
+    buttons: true
+
+  Button
+    id: defenseAddButton
+    !text: tr('Add')
+    width: 90
+    height: 60
+    margin-top: 5
+    anchors.right: parent.right
+    anchors.top: defenseslistTextList.bottom
+    @onClick: modules.tool_monstermaker.addDefenseToUIAndTable()
+
+  Button
+    id: defenseShowButton
+    !text: tr('Show')
+    width: 90
+    height: 60
+    anchors.right: parent.right
+    anchors.top: defenseAddButton.bottom
+    @onClick: modules.tool_monstermaker.showDefenseFromTable()
+
+  Button
+    id: defenseEditButton
+    !text: tr('Edit')
+    width: 90
+    height: 60
+    anchors.right: parent.right
+    anchors.top: defenseShowButton.bottom
+    @onClick: modules.tool_monstermaker.editDefenseFromTable()
+
+  Button
+    id: defenseDeleteButton
+    !text: tr('Delete')
+    width: 90
+    height: 60
+    anchors.right: parent.right
+    anchors.top: defenseEditButton.bottom
+    @onClick: modules.tool_monstermaker.deleteDefenseFromTable()

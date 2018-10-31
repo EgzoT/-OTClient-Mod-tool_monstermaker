@@ -1,0 +1,538 @@
+Panel
+  TextList
+  //MultilineTextEdit
+    id: attackslistTextList
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    vertical-scrollbar: attacksMultilineTextScroll
+    focusable: false
+    phantom: true
+    auto-focus: first
+    height: 115
+    //horizontal-scrollbar: attacksMultilineTextScrollH
+
+  VerticalScrollBar
+    id: attacksMultilineTextScroll
+    anchors.top: attackslistTextList.top
+    anchors.bottom: attackslistTextList.bottom
+    anchors.right: attackslistTextList.right
+    step: 16
+    pixels-scroll: true
+
+  //HorizontalScrollBar
+  //  id: attacksMultilineTextScrollH
+  //  anchors.top: attackslistTextList.bottom
+  //  anchors.right: attackslistTextList.right
+  //  anchors.left: attackslistTextList.left
+  //  step: 16
+  //  pixels-scroll: true
+
+  Button
+    id: attackAddButton
+    !text: tr('Add')
+    width: 100
+    height: 75
+    margin-top: 5
+    anchors.right: parent.right
+    anchors.top: attackslistTextList.bottom
+    @onClick: modules.tool_monstermaker.addToUIAndTable()
+
+  Button
+    id: attackShowButton
+    !text: tr('Show')
+    width: 100
+    height: 75
+    //margin-top: 5
+    anchors.right: parent.right
+    anchors.top: attackAddButton.bottom
+    @onClick: modules.tool_monstermaker.showAttackFromTable()
+
+  Button
+    id: attackEditButton
+    !text: tr('Edit')
+    width: 100
+    height: 75
+    //margin-top: 5
+    anchors.right: parent.right
+    anchors.top: attackShowButton.bottom
+    @onClick: modules.tool_monstermaker.editAttackFromTable()
+
+  Button
+    id: attackDeleteButton
+    !text: tr('Delete')
+    width: 100
+    height: 75
+    //margin-top: 5
+    anchors.right: parent.right
+    anchors.top: attackEditButton.bottom
+    @onClick: modules.tool_monstermaker.deleteAttackFromTable()
+
+  Label
+    id: nameLabel
+    width: 60
+    !text: tr('Name')
+    phantom: false
+    !tooltip: tr('There you can use various attacks like "melee".\nIt includes also spell names like:')
+    anchors.left: parent.left
+    anchors.top: attackslistTextList.bottom
+    margin-top: 8
+
+  Label
+    id: nametypeLabel
+    width: 60
+    !text: tr('Type:')
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: nameLabel.right
+    anchors.top: attackslistTextList.bottom
+    margin-top: 8
+
+  ComboBox
+    id: nametypeComboBox
+    width: 120
+    anchors.left: nametypeLabel.right
+    anchors.top: attackslistTextList.bottom
+    margin-top: 5
+    mouse-scroll: false
+    @onTextChange: showAttackName(self:getText())
+
+  //CheckBox changes
+
+  ComboBox
+    id: nameelementalComboBox
+    width: 120
+    anchors.left: nametypeComboBox.right
+    anchors.top: attackslistTextList.bottom
+    margin-top: 5
+    mouse-scroll: false
+
+  ComboBox
+    id: nameconditionsComboBox
+    width: 120
+    anchors.left: nametypeComboBox.right
+    anchors.top: attackslistTextList.bottom
+    margin-top: 5
+    mouse-scroll: false
+
+  ComboBox
+    id: namefieldsComboBox
+    width: 120
+    anchors.left: nametypeComboBox.right
+    anchors.top: attackslistTextList.bottom
+    margin-top: 5
+    mouse-scroll: false
+
+  ComboBox
+    id: namerunesComboBox
+    width: 120
+    anchors.left: nametypeComboBox.right
+    anchors.top: attackslistTextList.bottom
+    margin-top: 5
+    mouse-scroll: false
+
+  ComboBox
+    id: namespellsComboBox
+    width: 120
+    anchors.left: nametypeComboBox.right
+    anchors.top: attackslistTextList.bottom
+    margin-top: 5
+    mouse-scroll: false
+
+  InputBoxLineEdit
+    id: nameotherText
+    width: 120
+    anchors.left: nametypeComboBox.right
+    anchors.top: attackslistTextList.bottom
+    margin-top: 5
+
+  //CheckBox changes END
+
+  Label
+    id: minLabel
+    width: 30
+    !text: tr('Min')
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: nametypeComboBox.bottom
+    margin-top: 8
+
+  SpinBox
+    id: minText
+    width: 60
+    anchors.left: minLabel.right
+    anchors.top: nametypeComboBox.bottom
+    margin-top: 5
+    value: 1
+    minimum: -99999999999
+    maximum: 99999999999
+    focusable: true
+    buttons: true
+
+  Label
+    id: maxLabel
+    width: 30
+    !text: tr('Max')
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: minText.right
+    anchors.top: nametypeComboBox.bottom
+    margin-top: 8
+    margin-left: 5
+
+  SpinBox
+    id: maxText
+    width: 60
+    anchors.left: maxLabel.right
+    anchors.top: nametypeComboBox.bottom
+    margin-top: 5
+    minimum: -99999999999
+    maximum: 99999999999
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: skillCheckBox
+    text: 
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: maxText.right
+    anchors.top: nametypeComboBox.bottom
+    width:15
+    margin-top: 8
+    margin-left: 5
+    @onCheckChange: onSkillCheckBoxChange()
+
+  Label
+    id: skillLabel
+    width: 40
+    !text: tr('Skill')
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: skillCheckBox.right
+    anchors.top: nametypeComboBox.bottom
+    margin-top: 8
+    margin-left: 5
+
+  SpinBox
+    id: skillText
+    width: 40
+    anchors.left: skillLabel.right
+    anchors.top: nametypeComboBox.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 256
+    focusable: true
+    buttons: true
+
+  Label
+    id: attackLabel
+    width: 50
+    !text: tr('Attack')
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: skillText.right
+    anchors.top: nametypeComboBox.bottom
+    margin-top: 8
+    margin-left: 5
+
+  SpinBox
+    id: attackText
+    width: 40
+    anchors.left: attackLabel.right
+    anchors.top: nametypeComboBox.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 999
+    focusable: true
+    buttons: true
+
+  Label
+    id: intervalLabel
+    width: 120
+    !text: tr('Interval')
+    phantom: false
+    !tooltip: tr('It\'s how often the spell will be cast - 2000 = 2seconds.')
+    anchors.left: parent.left
+    anchors.top: minText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: intervalText
+    width: 120
+    anchors.left: intervalLabel.right
+    anchors.top: minText.bottom
+    margin-top: 5
+    minimum: 1000
+    maximum: 99999999999
+    focusable: true
+    buttons: true
+
+  Label
+    id: chanceLabel
+    width: 120
+    !text: tr('Chance')
+    phantom: false
+    !tooltip: tr('It\'s the chance to cast the spell successfully (in %%).')
+    anchors.left: parent.left
+    anchors.top: intervalText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: chanceText
+    width: 120
+    anchors.left: chanceLabel.right
+    anchors.top: intervalText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 100
+    focusable: true
+    buttons: true
+
+  //Label
+  //  id: lengthLabel
+  //  width: 120
+  //  !text: tr('Length')
+  //  phantom: false
+  //  !tooltip: tr('How long the beam/wave is - remember to set always spread="0".\nIf there is no spread it still will be cast as wave.\n(So length="x" spread="0").')
+  //  anchors.left: parent.left
+  //  anchors.top: chanceText.bottom
+  //  margin-top: 8
+
+  CheckBox
+    id: lengthCheckBox
+    text: Length
+    phantom: false
+    !tooltip: tr('How long the beam/wave is - remember to set always spread="0".\nIf there is no spread it still will be cast as wave.\n(So length="x" spread="0").')
+    anchors.left: parent.left
+    anchors.top: chanceText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.attacksLength:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.attacksLength:setEnabled(false)
+      end
+      if self:isChecked() then
+        modules.tool_monstermaker.attacksPanel:recursiveGetChildById('radiusCheckBox'):setEnabled(false)
+      elseif not self:isChecked() and not modules.tool_monstermaker.valuesTable.attacksSpreadCheckBox:isChecked() then
+        modules.tool_monstermaker.attacksPanel:recursiveGetChildById('radiusCheckBox'):setEnabled(true)
+      end
+
+  SpinBox
+    id: lengthText
+    width: 120
+    anchors.left: lengthCheckBox.right
+    anchors.top: chanceText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 11
+    focusable: true
+    buttons: true
+
+  //Label
+  //  id: spreadLabel
+  //  width: 120
+  //  !text: tr('Spread')
+  //  phantom: false
+  //  !tooltip: tr('How big spread is.')
+  //  anchors.left: parent.left
+  //  anchors.top: lengthText.bottom
+  //  margin-top: 8
+
+  CheckBox
+    id: spreadCheckBox
+    text: Spread
+    phantom: false
+    !tooltip: tr('How big spread is.')
+    anchors.left: parent.left
+    anchors.top: lengthText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.attacksSpread:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.attacksSpread:setEnabled(false)
+      end
+      if self:isChecked() then
+        modules.tool_monstermaker.attacksPanel:recursiveGetChildById('radiusCheckBox'):setEnabled(false)
+      elseif not self:isChecked() and not modules.tool_monstermaker.valuesTable.attacksLengthCheckBox:isChecked() then
+        modules.tool_monstermaker.attacksPanel:recursiveGetChildById('radiusCheckBox'):setEnabled(true)
+      end
+
+  SpinBox
+    id: spreadText
+    width: 120
+    //anchors.left: spreadLabel.right
+    anchors.left: spreadCheckBox.right
+    anchors.top: lengthText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 3
+    focusable: true
+    buttons: true
+
+  //Label
+  //  id: radiusLabel
+  //  width: 120
+  //  !text: tr('Radius')
+  //  phantom: false
+  //  !tooltip: tr('This is responsible for the size of area.\n(Radius won\'t work with spread and length - if there\'s already length and/or spread do not add radius).')
+  //  anchors.left: parent.left
+  //  anchors.top: spreadText.bottom
+  //  margin-top: 8
+
+  CheckBox
+    id: radiusCheckBox
+    text: Radius
+    phantom: false
+    !tooltip: tr('This is responsible for the size of area.\n(Radius won\'t work with spread and length - if there\'s already length and/or spread do not add radius).')
+    anchors.left: parent.left
+    anchors.top: spreadText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.attacksRadius:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.attacksRadius:setEnabled(false)
+      end
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.attacksLengthCheckBox:setEnabled(false)
+        modules.tool_monstermaker.valuesTable.attacksSpreadCheckBox:setEnabled(false)
+      else
+        modules.tool_monstermaker.valuesTable.attacksLengthCheckBox:setEnabled(true)
+        modules.tool_monstermaker.valuesTable.attacksSpreadCheckBox:setEnabled(true)
+      end
+
+  SpinBox
+    id: radiusText
+    width: 120
+    //anchors.left: radiusLabel.right
+    anchors.left: radiusCheckBox.right
+    anchors.top: spreadText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 9
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: poisonCheckBox
+    text: Poison
+    phantom: false
+    !tooltip: tr('Makes target poisoned, formula is:\nDesired damage(for example. 25hp/turn)*20 = 500 so poison="500"')
+    anchors.left: parent.left
+    anchors.top: radiusText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.attacksPoison:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.attacksPoison:setEnabled(false)
+      end
+
+  SpinBox
+    id: poisonText
+    width: 120
+    anchors.left: poisonCheckBox.right
+    anchors.top: radiusText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 999999999
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: targetCheckBox
+    text: Target
+    phantom: false
+    !tooltip: tr('Checked target - spell cast on monster itself.\nUnchecked target - spell cast on target.')
+    anchors.left: parent.left
+    anchors.top: poisonText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.attacksPanel:recursiveGetChildById('rangeLabel'):setEnabled(true)
+        modules.tool_monstermaker.attacksPanel:recursiveGetChildById('rangeText'):setEnabled(true)
+      else
+        modules.tool_monstermaker.attacksPanel:recursiveGetChildById('rangeLabel'):setEnabled(false)
+        modules.tool_monstermaker.attacksPanel:recursiveGetChildById('rangeText'):setEnabled(false)
+      end
+
+  //CheckBox
+  //  id: rangeCheckBox
+  //  text: Range
+  //  phantom: false
+  //  !tooltip: tr('Means how far your monster can shoot a ranged spell.')
+  //  anchors.left: parent.left
+  //  anchors.top: targetCheckBox.bottom
+  //  width: 120
+  //  margin-top: 8
+
+  Label
+    id: rangeLabel
+    width: 120
+    !text: tr('Range')
+    phantom: false
+    !tooltip: tr('Means how far your monster can shoot a ranged spell.')
+    anchors.left: parent.left
+    anchors.top: targetCheckBox.bottom
+    margin-top: 8
+
+  SpinBox
+    id: rangeText
+    width: 120
+    anchors.left: rangeLabel.right
+    anchors.top: targetCheckBox.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 12
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: areaEffectCheckBox
+    text: Area Effect
+    phantom: false
+    !tooltip: tr('There you can add various areaEffects for the spell.')
+    anchors.left: parent.left
+    anchors.top: rangeText.bottom
+    width: 120
+    margin-top: 8
+
+  ComboBox
+    id: areaEffectComboBox
+    width: 120
+    anchors.left: areaEffectCheckBox.right
+    anchors.top: rangeText.bottom
+    margin-top: 5
+    mouse-scroll: true
+    menu-scroll: true
+    menu-height: 300
+    menu-scroll-step: 10
+
+  CheckBox
+    id: shootEffectCheckBox
+    text: Shoot Effect
+    phantom: false
+    !tooltip: tr('There you can add various shootEffect for the spell.')
+    anchors.left: parent.left
+    anchors.top: areaEffectComboBox.bottom
+    width: 120
+    margin-top: 8
+
+  ComboBox
+    id: shootEffectComboBox
+    width: 120
+    anchors.left: shootEffectCheckBox.right
+    anchors.top: areaEffectComboBox.bottom
+    margin-top: 5
+    menu-scroll: true
+    menu-height: 300
+    menu-scroll-step: 10

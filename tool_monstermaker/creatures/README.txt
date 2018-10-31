@@ -1,0 +1,1 @@
+In this folder you find generated monsters XML files, if you want to load monster XML, add files here.

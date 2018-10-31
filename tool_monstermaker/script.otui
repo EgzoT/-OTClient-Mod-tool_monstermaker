@@ -1,0 +1,35 @@
+Panel
+  CheckBox
+    id: onscriptCheckBox
+    text: Script
+    phantom: false
+    !tooltip: tr('Check on to add script.')
+    anchors.left: parent.left
+    anchors.top: parent.top
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        scriptPanel:recursiveGetChildById('addscriptLabel'):setEnabled(true)
+        scriptPanel:recursiveGetChildById('addscriptText'):setEnabled(true)
+      else
+        scriptPanel:recursiveGetChildById('addscriptLabel'):setEnabled(false)
+        scriptPanel:recursiveGetChildById('addscriptText'):setEnabled(false)
+      end
+
+  Label
+    id: addscriptLabel
+    width: 120
+    !text: tr('Script')
+    phantom: false
+    !tooltip: tr('There you can use creaturescripts made for certain monsters.\nYou put this tag between flags and attacks.')
+    anchors.left: parent.left
+    anchors.top: onscriptCheckBox.bottom
+    margin-top: 8
+
+  InputBoxLineEdit
+    id: addscriptText
+    width: 180
+    anchors.left: addscriptLabel.right
+    anchors.top: onscriptCheckBox.bottom
+    margin-top: 5

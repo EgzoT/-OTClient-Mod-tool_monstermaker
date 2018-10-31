@@ -1,0 +1,292 @@
+Panel
+  TextList
+    id: lootlistTextList
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 5
+    vertical-scrollbar: lootMultilineTextScroll
+    focusable: false
+    phantom: true
+    auto-focus: first
+    height: 145
+
+  VerticalScrollBar
+    id: lootMultilineTextScroll
+    anchors.top: lootlistTextList.top
+    anchors.bottom: lootlistTextList.bottom
+    anchors.right: lootlistTextList.right
+    step: 16
+    pixels-scroll: true
+
+  Label
+    id: idLabel
+    width: 120
+    !text: tr('Id')
+    phantom: false
+    !tooltip: tr('Put itemid of item you want to being dropped by creature.')
+    anchors.left: parent.left
+    anchors.top: lootlistTextList.bottom
+    margin-top: 8
+
+  SpinBox
+    id: idText
+    width: 120
+    anchors.left: idLabel.right
+    anchors.top: lootlistTextList.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 100000
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: nameCheckBox
+    text:
+    phantom: false
+    anchors.left: idText.right
+    anchors.top: lootlistTextList.bottom
+    width: 20
+    margin-top: 8
+    margin-left: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.lootNameLabel:setEnabled(true)
+        modules.tool_monstermaker.valuesTable.lootName:setEnabled(true)
+        modules.tool_monstermaker.valuesTable.lootIdLabel:setEnabled(false)
+        modules.tool_monstermaker.valuesTable.lootId:setEnabled(false)
+      else
+        modules.tool_monstermaker.valuesTable.lootNameLabel:setEnabled(false)
+        modules.tool_monstermaker.valuesTable.lootName:setEnabled(false)
+        modules.tool_monstermaker.valuesTable.lootIdLabel:setEnabled(true)
+        modules.tool_monstermaker.valuesTable.lootId:setEnabled(true)
+      end
+
+  Label
+    id: nameLabel
+    width: 40
+    !text: tr('Name')
+    phantom: false
+    !tooltip: tr('Put name of item you want to being dropped by creature.')
+    anchors.left: nameCheckBox.right
+    anchors.top: lootlistTextList.bottom
+    margin-top: 8
+
+  InputBoxLineEdit
+    id: nameText
+    width: 120
+    anchors.left: nameLabel.right
+    anchors.top: lootlistTextList.bottom
+    margin-top: 5
+    margin-left: 40
+
+  Label
+    id: chanceLabel
+    width: 120
+    !text: tr('Chance')
+    phantom: false
+    !tooltip: tr('Put chance for item to being dropped.\nchance="1" - 0.001%%\nchance="10" - 0.01%%\nchance="100" - 0.1%%\nchance="1000" - 1%%\nchance="10000" - 10%%\nchance="100000" - 100%%\nchance="5423" - 5.432%%\nchance="75826" - 75.826%%')
+    anchors.left: parent.left
+    anchors.top: idText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: chanceText
+    width: 120
+    anchors.left: chanceLabel.right
+    anchors.top: idText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 99999999999999
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: countmaxCheckBox
+    text: Count Max
+    phantom: false
+    !tooltip: tr('Put maximum value of dropped items (only stackable items) it varies from 1 to whatever you want.')
+    anchors.left: parent.left
+    anchors.top: chanceText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.lootCountmax:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.lootCountmax:setEnabled(false)
+      end
+
+  SpinBox
+    id: countmaxText
+    width: 120
+    anchors.left: countmaxCheckBox.right
+    anchors.top: chanceText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 10000000
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: subtypeCheckBox
+    text: Subtype
+    phantom: false
+    !tooltip: tr('It stands for fluid type in any fluid container.')
+    anchors.left: parent.left
+    anchors.top: countmaxText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.lootSubtype:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.lootSubtype:setEnabled(false)
+      end
+
+  ComboBox
+    id: subtypeComboBox
+    width: 120
+    anchors.left: subtypeCheckBox.right
+    anchors.top: countmaxText.bottom
+    margin-top: 5
+    menu-scroll: true
+    menu-height: 300
+    menu-scroll-step: 10
+
+  CheckBox
+    id: actionidCheckBox
+    text: Action Id
+    phantom: false
+    !tooltip: tr('Add actionId to a certain item when dropped.')
+    anchors.left: parent.left
+    anchors.top: subtypeComboBox.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.lootActionid:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.lootActionid:setEnabled(false)
+      end
+
+  SpinBox
+    id: actionidText
+    width: 120
+    anchors.left: actionidCheckBox.right
+    anchors.top: subtypeComboBox.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 10000000
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: uniqueidCheckBox
+    text: Unique Id
+    phantom: false
+    !tooltip: tr('Add uniqueId to a certain item when dropped.')
+    anchors.left: parent.left
+    anchors.top: actionidText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.lootUniqueid:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.lootUniqueid:setEnabled(false)
+      end
+
+  SpinBox
+    id: uniqueidText
+    width: 120
+    anchors.left: actionidCheckBox.right
+    anchors.top: actionidText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 10000000
+    focusable: true
+    buttons: true
+
+  CheckBox
+    id: textCheckBox
+    text: Text
+    phantom: false
+    !tooltip: tr('Add text to all writeable items.')
+    anchors.left: parent.left
+    anchors.top: uniqueidText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.lootText:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.lootText:setEnabled(false)
+      end
+
+  InputBoxLineEdit
+    id: textText
+    width: 120
+    anchors.left: textCheckBox.right
+    anchors.top: uniqueidText.bottom
+    margin-top: 5
+
+  CheckBox
+    id: commentCheckBox
+    text: Comment
+    phantom: false
+    !tooltip: tr('You may add comment for example to describe loot item name.')
+    anchors.left: parent.left
+    anchors.top: textText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.lootComment:setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.lootComment:setEnabled(false)
+      end
+
+  InputBoxLineEdit
+    id: commentText
+    width: 120
+    anchors.left: commentCheckBox.right
+    anchors.top: textText.bottom
+    margin-top: 5
+
+  Button
+    id: lootAddButton
+    !text: tr('Add')
+    width: 90
+    height: 60
+    margin-top: 5
+    anchors.right: parent.right
+    anchors.top: lootlistTextList.bottom
+    @onClick: modules.tool_monstermaker.addLootToUIAndTable()
+
+  Button
+    id: lootShowButton
+    !text: tr('Show')
+    width: 90
+    height: 60
+    anchors.right: parent.right
+    anchors.top: lootAddButton.bottom
+    @onClick: modules.tool_monstermaker.showLootFromTable()
+
+  Button
+    id: lootEditButton
+    !text: tr('Edit')
+    width: 90
+    height: 60
+    anchors.right: parent.right
+    anchors.top: lootShowButton.bottom
+    @onClick: modules.tool_monstermaker.editLootFromTable()
+
+  Button
+    id: lootDeleteButton
+    !text: tr('Delete')
+    width: 90
+    height: 60
+    anchors.right: parent.right
+    anchors.top: lootEditButton.bottom
+    @onClick: modules.tool_monstermaker.deleteLootFromTable()

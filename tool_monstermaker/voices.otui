@@ -1,0 +1,127 @@
+Panel
+  Label
+    id: intervalLabel
+    width: 70
+    !text: tr('Interval')
+    phantom: false
+    !tooltip: tr("How often monster will be speak.")
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 13
+
+  SpinBox
+    id: intervalText
+    width: 120
+    anchors.left: intervalLabel.right
+    anchors.top: parent.top
+    margin-top: 10
+    minimum: 1000
+    maximum: 999999999
+    focusable: true
+    buttons: true
+
+  Label
+    id: chanceLabel
+    width: 60
+    !text: tr('Chance')
+    phantom: false
+    !tooltip: tr("Chance to speak successfully (in %%).")
+    anchors.left: intervalText.right
+    anchors.top: parent.top
+    margin-top: 13
+    margin-left: 15
+
+  SpinBox
+    id: chanceText
+    width: 80
+    anchors.left: chanceLabel.right
+    anchors.top: parent.top
+    margin-top: 10
+    minimum: 1
+    maximum: 100
+    focusable: true
+    buttons: true
+
+  TextList
+    id: voiceslistTextList
+    anchors.top: chanceText.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 5
+    vertical-scrollbar: voicesMultilineTextScroll
+    focusable: false
+    phantom: true
+    auto-focus: first
+    height: 145
+
+  VerticalScrollBar
+    id: voicesMultilineTextScroll
+    anchors.top: voiceslistTextList.top
+    anchors.bottom: voiceslistTextList.bottom
+    anchors.right: voiceslistTextList.right
+    step: 16
+    pixels-scroll: true
+
+  Label
+    id: sentenceLabel
+    width: 60
+    !text: tr('Sentence')
+    phantom: false
+    !tooltip: tr("Put any message you want to be spoke by your monster.")
+    anchors.left: parent.left
+    anchors.top: voiceslistTextList.bottom
+    margin-top: 8
+
+  InputBoxLineEdit
+    id: sentenceText
+    width: 420
+    anchors.left: parent.left
+    anchors.top: sentenceLabel.bottom
+    margin-top: 5
+
+  CheckBox
+    id: yellCheckBox
+    text: Yell
+    phantom: false
+    !tooltip: tr('It can be heard in greater distance (including different floors) than normal message.')
+    anchors.left: parent.left
+    anchors.top: sentenceText.bottom
+    width: 140
+    margin-top: 8
+
+  Button
+    id: voicesAddButton
+    !text: tr('Add')
+    width: 90
+    height: 50
+    margin-top: 5
+    anchors.right: parent.right
+    anchors.top: voiceslistTextList.bottom
+    @onClick: modules.tool_monstermaker.addVoiceToUIAndTable()
+
+  Button
+    id: voicesShowButton
+    !text: tr('Show')
+    width: 90
+    height: 50
+    anchors.right: parent.right
+    anchors.top: voicesAddButton.bottom
+    @onClick: modules.tool_monstermaker.showVoiceFromTable()
+
+  Button
+    id: voicesEditButton
+    !text: tr('Edit')
+    width: 90
+    height: 50
+    anchors.right: parent.right
+    anchors.top: voicesShowButton.bottom
+    @onClick: modules.tool_monstermaker.editVoiceFromTable()
+
+  Button
+    id: voicesDeleteButton
+    !text: tr('Delete')
+    width: 90
+    height: 50
+    anchors.right: parent.right
+    anchors.top: voicesEditButton.bottom
+    @onClick: modules.tool_monstermaker.deleteVoiceFromTable()

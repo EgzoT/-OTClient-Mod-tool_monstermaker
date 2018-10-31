@@ -1,0 +1,170 @@
+Panel
+  Label
+    id: exportLabel
+    width: 120
+    !text: tr('Export')
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 8
+
+  HorizontalSeparator
+    id: exportSeparator
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: exportLabel.bottom
+    margin-top: 5
+
+  Label
+    id: filenameLabel
+    width: 120
+    !text: tr('File name')
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: exportSeparator.bottom
+    margin-top: 8
+
+  Label
+    id: actualNameLabel
+    width: 150
+    phantom: false
+    anchors.left: filenameLabel.right
+    anchors.top: exportSeparator.bottom
+    margin-top: 8
+
+  CheckBox
+    id: ownNameCheckBox
+    text: Own Name
+    phantom: false
+    !tooltip: tr('Set if you want add own name.')
+    anchors.left: actualNameLabel.right
+    anchors.top: exportSeparator.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.ioFilename:setEnabled(true)
+        modules.tool_monstermaker.valuesTable.ioActualname:setText(modules.tool_monstermaker.valuesTable.ioFilename:getText()..'.xml')
+      else
+        modules.tool_monstermaker.valuesTable.ioFilename:setEnabled(false)
+        modules.tool_monstermaker.valuesTable.ioActualname:setText(modules.tool_monstermaker.valuesTable.name:getText()..'.xml')
+      end
+
+  InputBoxLineEdit
+    id: filenameText
+    width: 150
+    anchors.left: ownNameCheckBox.right
+    anchors.top: exportSeparator.bottom
+    margin-top: 5
+    @onTextChange: |
+      if modules.tool_monstermaker.valuesTable.ioOwnNameCheckBox:isChecked() then
+        modules.tool_monstermaker.valuesTable.ioActualname:setText(self:getText()..'.xml')
+      end
+
+  Button
+    id: saveButton
+    !text: tr('Save')
+    width: 80
+    height: 24
+    margin-top: 5
+    anchors.left: parent.left
+    anchors.top: filenameText.bottom
+    @onClick: modules.tool_monstermaker.saveToXML()
+
+  Label
+    id: importLabel
+    width: 120
+    !text: tr('Import')
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: saveButton.bottom
+    margin-top: 50
+
+  HorizontalSeparator
+    id: importSeparator
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: importLabel.bottom
+    margin-top: 5
+
+  TextList
+    id: ioTextList
+    anchors.top: importSeparator.bottom
+    anchors.left: parent.left
+    margin-top: 5
+    vertical-scrollbar: ioMultilineTextScroll
+    focusable: false
+    phantom: true
+    auto-focus: first
+    height: 145
+    width: 220
+
+  VerticalScrollBar
+    id: ioMultilineTextScroll
+    anchors.top: ioTextList.top
+    anchors.bottom: ioTextList.bottom
+    anchors.right: ioTextList.right
+    step: 16
+    pixels-scroll: true
+
+  Button
+    id: loadButton
+    !text: tr('Load')
+    width: 80
+    height: 24
+    margin-top: 5
+    anchors.left: parent.left
+    anchors.top: ioTextList.bottom
+    @onClick: modules.tool_monstermaker.loadFromXML()
+
+  Button
+    id: refreshButton
+    !text: tr('Refresh')
+    width: 80
+    height: 24
+    margin-top: 5
+    margin-left: 5
+    anchors.left: loadButton.right
+    anchors.top: ioTextList.bottom
+    @onClick: modules.tool_monstermaker.addCreatureFilesToList()
+
+  Button
+    id: deleteButton
+    !text: tr('Delete')
+    width: 80
+    height: 24
+    margin-top: 5
+    margin-left: 5
+    anchors.left: refreshButton.right
+    anchors.top: ioTextList.bottom
+    @onClick: modules.tool_monstermaker.deleteFileXML()
+
+  Label
+    id: otherLabel
+    width: 120
+    !text: tr('Other')
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: loadButton.bottom
+    margin-top: 12
+
+  HorizontalSeparator
+    id: otherSeparator
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: otherLabel.bottom
+    margin-top: 5
+
+  Button
+    id: clearButton
+    !text: tr('Clear All')
+    width: 80
+    height: 24
+    margin-top: 5
+    anchors.left: parent.left
+    anchors.top: otherSeparator.bottom
+    @onClick: modules.tool_monstermaker.clearAllOptionsButton()

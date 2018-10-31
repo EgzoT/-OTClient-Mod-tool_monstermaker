@@ -1,0 +1,325 @@
+Panel
+  Label
+    id: elementsLabel
+    width: 120
+    !text: tr('Elements')
+    phantom: false
+    !tooltip: tr("Resistance or weakness to certain elements to your monster.\n+ Minus values - Means that your monster will be weak to certain element.\nYou can put there any value you want, starting from -1.\n+ Positive values - Means that your monster will be resistant to certain element.\nYou can put there values starting from 1 ending on 99 (100 would mean full immunity and there\'s different category).\n* If you put here 100%% resistance to for example fire, you monster yes will be immune to fire but it will also WALK AROUND FIRE FIELDS,\nnot onto them as it\'s supposed to be and you don\'t want that to happen.")
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 7
+
+  Label
+    id: holyLabel
+    phantom: false
+    !tooltip: tr('Values in percent.')
+    width: 80
+    !text: tr('Holy')
+    anchors.left: parent.left
+    anchors.top: elementsLabel.bottom
+    margin-top: 13
+
+  SpinBox
+    id: holyText
+    width: 80
+    anchors.left: holyLabel.right
+    anchors.top: elementsLabel.bottom
+    margin-top: 10
+    minimum: -9999999
+    maximum: 9999999
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('holyScrollbar'):setValue(self:getValue())
+
+  OptionScrollbar
+    id: holyScrollbar
+    anchors.left: holyText.right
+    anchors.right: parent.right
+    anchors.top: elementsLabel.bottom
+    margin-top: 14
+    margin-left: 5
+    minimum: -100
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('holyText'):setText(self:getValue())
+
+  Label
+    id: deathLabel
+    phantom: false
+    !tooltip: tr('Values in percent.')
+    width: 80
+    !text: tr('Death')
+    anchors.left: parent.left
+    anchors.top: holyText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: deathText
+    width: 80
+    anchors.left: deathLabel.right
+    anchors.top: holyText.bottom
+    margin-top: 5
+    minimum: -9999999
+    maximum: 9999999
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('deathScrollbar'):setValue(self:getValue())
+
+  OptionScrollbar
+    id: deathScrollbar
+    anchors.left: deathText.right
+    anchors.right: parent.right
+    anchors.top: holyText.bottom
+    margin-top: 9
+    margin-left: 5
+    minimum: -100
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('deathText'):setText(self:getValue())
+
+  Label
+    id: iceLabel
+    phantom: false
+    !tooltip: tr('Values in percent.')
+    width: 80
+    !text: tr('Ice')
+    anchors.left: parent.left
+    anchors.top: deathText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: iceText
+    width: 80
+    anchors.left: iceLabel.right
+    anchors.top: deathText.bottom
+    margin-top: 5
+    minimum: -9999999
+    maximum: 9999999
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('iceScrollbar'):setValue(self:getValue())
+
+  OptionScrollbar
+    id: iceScrollbar
+    anchors.left: iceText.right
+    anchors.right: parent.right
+    anchors.top: deathText.bottom
+    margin-top: 9
+    margin-left: 5
+    minimum: -100
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('iceText'):setText(self:getValue())
+
+  Label
+    id: fireLabel
+    phantom: false
+    !tooltip: tr('Values in percent.')
+    width: 80
+    !text: tr('Fire')
+    anchors.left: parent.left
+    anchors.top: iceText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: fireText
+    width: 80
+    anchors.left: fireLabel.right
+    anchors.top: iceText.bottom
+    margin-top: 5
+    minimum: -9999999
+    maximum: 9999999
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('fireScrollbar'):setValue(self:getValue())
+
+  OptionScrollbar
+    id: fireScrollbar
+    anchors.left: fireText.right
+    anchors.right: parent.right
+    anchors.top: iceText.bottom
+    margin-top: 9
+    margin-left: 5
+    minimum: -100
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('fireText'):setText(self:getValue())
+
+  Label
+    id: earthLabel
+    phantom: false
+    !tooltip: tr('Values in percent.')
+    width: 80
+    !text: tr('Earth')
+    anchors.left: parent.left
+    anchors.top: fireText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: earthText
+    width: 80
+    anchors.left: earthLabel.right
+    anchors.top: fireText.bottom
+    margin-top: 5
+    minimum: -9999999
+    maximum: 9999999
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('earthScrollbar'):setValue(self:getValue())
+
+  OptionScrollbar
+    id: earthScrollbar
+    anchors.left: earthText.right
+    anchors.right: parent.right
+    anchors.top: fireText.bottom
+    margin-top: 9
+    margin-left: 5
+    minimum: -100
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('earthText'):setText(self:getValue())
+
+  Label
+    id: energyLabel
+    phantom: false
+    !tooltip: tr('Values in percent.')
+    width: 80
+    !text: tr('Energy')
+    anchors.left: parent.left
+    anchors.top: earthText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: energyText
+    width: 80
+    anchors.left: energyLabel.right
+    anchors.top: earthText.bottom
+    margin-top: 5
+    minimum: -9999999
+    maximum: 9999999
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('energyScrollbar'):setValue(self:getValue())
+
+  OptionScrollbar
+    id: energyScrollbar
+    anchors.left: energyText.right
+    anchors.right: parent.right
+    anchors.top: earthText.bottom
+    margin-top: 9
+    margin-left: 5
+    minimum: -100
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('energyText'):setText(self:getValue())
+
+  Label
+    id: physicalLabel
+    phantom: false
+    !tooltip: tr('Values in percent.')
+    width: 80
+    !text: tr('Physical')
+    anchors.left: parent.left
+    anchors.top: energyText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: physicalText
+    width: 80
+    anchors.left: physicalLabel.right
+    anchors.top: energyText.bottom
+    margin-top: 5
+    minimum: -9999999
+    maximum: 9999999
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('physicalScrollbar'):setValue(self:getValue())
+
+  OptionScrollbar
+    id: physicalScrollbar
+    anchors.left: physicalText.right
+    anchors.right: parent.right
+    anchors.top: energyText.bottom
+    margin-top: 9
+    margin-left: 5
+    minimum: -100
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('physicalText'):setText(self:getValue())
+
+  Label
+    id: lifedrainLabel
+    phantom: false
+    !tooltip: tr('Values in percent.')
+    width: 80
+    !text: tr('Life Drain')
+    anchors.left: parent.left
+    anchors.top: physicalText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: lifedrainText
+    width: 80
+    anchors.left: lifedrainLabel.right
+    anchors.top: physicalText.bottom
+    margin-top: 5
+    minimum: -9999999
+    maximum: 9999999
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('lifedrainScrollbar'):setValue(self:getValue())
+
+  OptionScrollbar
+    id: lifedrainScrollbar
+    anchors.left: lifedrainText.right
+    anchors.right: parent.right
+    anchors.top: physicalText.bottom
+    margin-top: 9
+    margin-left: 5
+    minimum: -100
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('lifedrainText'):setText(self:getValue())
+
+  Label
+    id: drownLabel
+    phantom: false
+    !tooltip: tr('Values in percent.')
+    width: 80
+    !text: tr('Drown')
+    anchors.left: parent.left
+    anchors.top: lifedrainText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: drownText
+    width: 80
+    anchors.left: drownLabel.right
+    anchors.top: lifedrainText.bottom
+    margin-top: 5
+    minimum: -9999999
+    maximum: 9999999
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('drownScrollbar'):setValue(self:getValue())
+
+  OptionScrollbar
+    id: drownScrollbar
+    anchors.left: drownText.right
+    anchors.right: parent.right
+    anchors.top: lifedrainText.bottom
+    margin-top: 9
+    margin-left: 5
+    minimum: -100
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.elementsPanel:recursiveGetChildById('drownText'):setText(self:getValue())

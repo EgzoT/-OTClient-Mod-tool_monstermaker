@@ -1,0 +1,158 @@
+Panel
+  Label
+    id: maxSummonsLabel
+    width: 120
+    !text: tr('Max summons')
+    phantom: false
+    !tooltip: tr("How many summons can your monster have in total.")
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 13
+
+  SpinBox
+    id: maxSummonsText
+    width: 50
+    anchors.left: maxSummonsLabel.right
+    anchors.top: parent.top
+    margin-top: 10
+    minimum: 0
+    maximum: 100
+    focusable: true
+    buttons: true
+
+  TextList
+    id: summonslistTextList
+    anchors.top: maxSummonsText.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin-top: 5
+    vertical-scrollbar: summonsMultilineTextScroll
+    focusable: false
+    phantom: true
+    auto-focus: first
+    height: 145
+
+  VerticalScrollBar
+    id: summonsMultilineTextScroll
+    anchors.top: summonslistTextList.top
+    anchors.bottom: summonslistTextList.bottom
+    anchors.right: summonslistTextList.right
+    step: 16
+    pixels-scroll: true
+
+  Label
+    id: summonNameLabel
+    width: 120
+    !text: tr('Summon name')
+    phantom: false
+    !tooltip: tr("Put name of the monster you want to be summoned by your creature.")
+    anchors.left: parent.left
+    anchors.top: summonslistTextList.bottom
+    margin-top: 8
+
+  InputBoxLineEdit
+    id: summonNameText
+    width: 120
+    anchors.left: summonNameLabel.right
+    anchors.top: summonslistTextList.bottom
+    margin-top: 5
+
+  Label
+    id: intervalLabel
+    width: 120
+    !text: tr('Interval')
+    phantom: false
+    !tooltip: tr("How often monster will be summon.")
+    anchors.left: parent.left
+    anchors.top: summonNameText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: intervalText
+    width: 80
+    anchors.left: intervalLabel.right
+    anchors.top: summonNameText.bottom
+    margin-top: 5
+    minimum: 1000
+    maximum: 9999999
+    focusable: true
+    buttons: true
+
+  Label
+    id: chanceLabel
+    width: 120
+    !text: tr('Chance')
+    phantom: false
+    !tooltip: tr("Chance to summon successfully (in %%).")
+    anchors.left: parent.left
+    anchors.top: intervalText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: chanceText
+    width: 80
+    anchors.left: chanceLabel.right
+    anchors.top: intervalText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 100
+    focusable: true
+    buttons: true
+
+  Label
+    id: maxLabel
+    width: 120
+    !text: tr('Max')
+    phantom: false
+    !tooltip: tr("How much of each kind of summons it can have at max.")
+    anchors.left: parent.left
+    anchors.top: chanceText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: maxText
+    width: 80
+    anchors.left: maxLabel.right
+    anchors.top: chanceText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 100
+    focusable: true
+    buttons: true
+
+  Button
+    id: summonsAddButton
+    !text: tr('Add')
+    width: 90
+    height: 50
+    margin-top: 5
+    anchors.right: parent.right
+    anchors.top: summonslistTextList.bottom
+    @onClick: modules.tool_monstermaker.addSummonToUIAndTable()
+
+  Button
+    id: summonsShowButton
+    !text: tr('Show')
+    width: 90
+    height: 50
+    anchors.right: parent.right
+    anchors.top: summonsAddButton.bottom
+    @onClick: modules.tool_monstermaker.showSummonFromTable()
+
+  Button
+    id: summonsEditButton
+    !text: tr('Edit')
+    width: 90
+    height: 50
+    anchors.right: parent.right
+    anchors.top: summonsShowButton.bottom
+    @onClick: modules.tool_monstermaker.editSummonFromTable()
+
+  Button
+    id: summonsDeleteButton
+    !text: tr('Delete')
+    width: 90
+    height: 50
+    anchors.right: parent.right
+    anchors.top: summonsEditButton.bottom
+    @onClick: modules.tool_monstermaker.deleteSummonFromTable()

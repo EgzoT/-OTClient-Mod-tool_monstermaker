@@ -1,0 +1,140 @@
+Panel
+  Label
+    id: immunitiesLabel
+    width: 120
+    !text: tr('Immunities')
+    phantom: false
+    !tooltip: tr("Select to set immunities.")
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 7
+
+  CheckBox
+    id: holyCheckBox
+    text: Holy
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: immunitiesLabel.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: deathCheckBox
+    text: Death
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: holyCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: iceCheckBox
+    text: Ice
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: deathCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: fireCheckBox
+    text: Fire
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: iceCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: earthCheckBox
+    text: Earth
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: fireCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: energyCheckBox
+    text: Energy
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: earthCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: physicalCheckBox
+    text: Physical
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: energyCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: lifedrainCheckBox
+    text: Life Drain
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: physicalCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: drownCheckBox
+    text: Drown
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: lifedrainCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: paralyzeCheckBox
+    text: Paralyze
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: drownCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: drunkCheckBox
+    text: Drunk
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: paralyzeCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: invisibleCheckBox
+    text: Invisible
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: drunkCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  CheckBox
+    id: outfitCheckBox
+    text: Outfit
+    phantom: false
+    !tooltip: tr('')
+    anchors.left: parent.left
+    anchors.top: invisibleCheckBox.bottom
+    width: 140
+    margin-top: 8

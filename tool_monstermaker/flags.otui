@@ -1,0 +1,201 @@
+Panel
+  CheckBox
+    id: summonableCheckBox
+    text: Summonable
+    phantom: false
+    !tooltip: tr('Check if you want your monster to be summoned.\n(You need to add value to mana="x" in order to spent mana when summoned).\nUncheck if you dont want it to be summoned.')
+    anchors.left: parent.left
+    anchors.top: parent.top
+    width: 120
+    margin-top: 8
+
+  CheckBox
+    id: attackableCheckBox
+    text: Attackable
+    phantom: false
+    !tooltip: tr('Check so you can attack it.\nUncheck if you dont want it to be attackable.')
+    anchors.left: parent.left
+    anchors.top: summonableCheckBox.bottom
+    width: 120
+    margin-top: 8
+
+  CheckBox
+    id: hostileCheckBox
+    text: Hostile
+    phantom: false
+    !tooltip: tr('Check so your monster will be aggressive.\nUncheck if you want your monster to be friendly(like "deer").')
+    anchors.left: parent.left
+    anchors.top: attackableCheckBox.bottom
+    width: 120
+    margin-top: 8
+
+  CheckBox
+    id: illusionableCheckBox
+    text: Illusionable
+    phantom: false
+    !tooltip: tr('Check if you want players to change into this monster using "Creature Illusion" spell.\nUncheck if it shouldn\'t be illusionable.')
+    anchors.left: parent.left
+    anchors.top: hostileCheckBox.bottom
+    width: 120
+    margin-top: 8
+
+  CheckBox
+    id: convinceableCheckBox
+    text: Convinceable
+    phantom: false
+    !tooltip: tr('Check if you want your monster to be convinced using "Convince Creature Rune".\n(You need to add value to mana="x" in order to spent mana when summoned).\nUncheck if you dont want it to be convinced.')
+    anchors.left: parent.left
+    anchors.top: illusionableCheckBox.bottom
+    width: 120
+    margin-top: 8
+
+  CheckBox
+    id: pushableCheckBox
+    text: Pushable
+    phantom: false
+    !tooltip: tr('Check if you want your monster to be pushed by players or other monsters.\n(Can be killed with that sometimes).')
+    anchors.left: parent.left
+    anchors.top: convinceableCheckBox.bottom
+    width: 120
+    margin-top: 8
+
+  CheckBox
+    id: canpushitemsCheckBox
+    text: Canpushitems
+    phantom: false
+    !tooltip: tr('Check if you want your monster to push other things like boxes, chests etc.')
+    anchors.left: parent.left
+    anchors.top: pushableCheckBox.bottom
+    width: 120
+    margin-top: 8
+
+  CheckBox
+    id: canpushcreaturesCheckBox
+    text: Canpushcreatures
+    phantom: false
+    !tooltip: tr('Check if you want your monster to push other creatures.\n(Only creatures with checked pushable, else wont push).')
+    anchors.left: parent.left
+    anchors.top: canpushitemsCheckBox.bottom
+    width: 140
+    margin-top: 8
+
+  Label
+    id: targetdistanceLabel
+    width: 120
+    !text: tr('Targetdistance')
+    phantom: false
+    !tooltip: tr('It\'s the range which creature keeps between him and target.\nSo put "1" if you want your creature to fight in melee range (close to you) or put "4" if you want it to keep distance like a warlock.\n(Of course you can put also "2" or "8" targetdistance, "1" and "4" are values used the most).')
+    anchors.left: parent.left
+    anchors.top: canpushcreaturesCheckBox.bottom
+    margin-top: 8
+
+  SpinBox
+    id: targetdistanceText
+    width: 120
+    anchors.left: targetdistanceLabel.right
+    anchors.top: canpushcreaturesCheckBox.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 20
+    focusable: true
+    buttons: true
+
+  Label
+    id: staticattackLabel
+    phantom: false
+    !tooltip: tr('This flag is responsible for monster "dancing" around target.\nSo if you put "100" monster won\'t move around it\'s target at all, if you put "1" it will be dancing around you like crazy.\nI suggest to use it between 85-95.')
+    width: 120
+    anchors.left: parent.left
+    anchors.top: targetdistanceText.bottom
+    margin-top: 8
+
+  OptionScrollbar
+    id: staticattackScrollbar
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: staticattackLabel.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.flagsPanel:recursiveGetChildById('staticattackLabel'):setText(tr('Staticattack %s', self:getValue()))
+
+  CheckBox
+    id: hidehealthCheckBox
+    text: Hidehealth
+    phantom: false
+    !tooltip: tr('Check if you want your monster healthbar and name to be invisible.\n(You won\'t be able to target it - no red box around monster).\nThe only monster using it are traps like - plaguethrower, flamethrower, shredderthrower etc.')
+    anchors.left: parent.left
+    anchors.top: staticattackScrollbar.bottom
+    width: 140
+    margin-top: 8
+
+  Label
+    id: lightcolorLabel
+    width: 120
+    !text: tr('Lightcolor')
+    phantom: false
+    !tooltip: tr('Put "0" so monster wont emite any light at all.\nPut from 1 - 255 so it will emit light of that color.')
+    anchors.left: parent.left
+    anchors.top: hidehealthCheckBox.bottom
+    margin-top: 8
+
+  SpinBox
+    id: lightcolorText
+    width: 120
+    anchors.left: lightcolorLabel.right
+    anchors.top: hidehealthCheckBox.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 255
+    focusable: true
+    buttons: true
+    @onValueChange: |
+      if self:getText() == '0' then
+        modules.tool_monstermaker.flagsPanel:recursiveGetChildById('lightlevelLabel'):setEnabled(false)
+        modules.tool_monstermaker.flagsPanel:recursiveGetChildById('lightlevelText'):setEnabled(false)
+      else
+        modules.tool_monstermaker.flagsPanel:recursiveGetChildById('lightlevelLabel'):setEnabled(true)
+        modules.tool_monstermaker.flagsPanel:recursiveGetChildById('lightlevelText'):setEnabled(true)
+      end
+
+  Label
+    id: lightlevelLabel
+    width: 120
+    !text: tr('Lightlevel')
+    phantom: false
+    !tooltip: tr('This is responsible for lightlevel.\n(Works only if your lightcolor is greater than 0).')
+    anchors.left: parent.left
+    anchors.top: lightcolorText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: lightlevelText
+    width: 120
+    anchors.left: lightlevelLabel.right
+    anchors.top: lightcolorText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 100
+    focusable: true
+    buttons: true
+
+  Label
+    id: runonhealthLabel
+    phantom: false
+    !tooltip: tr('This flag is responsible for monster running away - number is the amount of health.\nSo if runonhealth="5" means that your creature will run when it\'s health is 5 or below.\nRunonhealth="0" means that creature will fight until death.')
+    width: 120
+    anchors.left: parent.left
+    anchors.top: lightlevelText.bottom
+    margin-top: 8
+
+  OptionScrollbar
+    id: runonhealthScrollbar
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: runonhealthLabel.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.flagsPanel:recursiveGetChildById('runonhealthLabel'):setText(tr('Runonhealth %s', self:getValue()))

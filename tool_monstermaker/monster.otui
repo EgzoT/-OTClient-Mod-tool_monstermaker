@@ -1,0 +1,500 @@
+Panel
+  Label
+    id: nameLabel
+    width: 120
+    !text: tr('Monster name:')
+    phantom: false
+    !tooltip: tr('Put your monster name.')
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 8
+
+  InputBoxLineEdit
+    id: nameText
+    width: 120
+    anchors.left: nameLabel.right
+    anchors.top: parent.top
+    margin-top: 5
+    @onTextChange: |
+      if not modules.tool_monstermaker.valuesTable.ioOwnNameCheckBox:isChecked() then
+        modules.tool_monstermaker.valuesTable.ioActualname:setText(self:getText()..'.xml')
+      end
+
+  Label
+    id: nameDescriptionLabel
+    width: 120
+    !text: tr('Name description:')
+    phantom: false
+    !tooltip: tr('Put description of your monster.\nExample:\n"A demon loses 5 hitpoints due to an attack by a test."\n"a test" is name description.')
+    anchors.left: parent.left
+    anchors.top: nameText.bottom
+    margin-top: 8
+
+  InputBoxLineEdit
+    id: nameDescriptionText
+    width: 120
+    anchors.left: nameDescriptionLabel.right
+    anchors.top: nameText.bottom
+    margin-top: 5
+
+  Label
+    id: raceLabel
+    width: 120
+    !text: tr('Race:')
+    phantom: false
+    !tooltip: tr('Choose race for monster.')
+    anchors.left: parent.left
+    anchors.top: nameDescriptionText.bottom
+    margin-top: 8
+
+  ComboBox
+    id: raceComboBox
+    width: 120
+    anchors.left: raceLabel.right
+    anchors.top: nameDescriptionText.bottom
+    margin-top: 5
+    mouse-scroll: false
+
+  Label
+    id: experienceLabel
+    width: 120
+    !text: tr('Experience:')
+    phantom: false
+    !tooltip: tr('Choose how many experience points gain player for kill monster.')
+    anchors.left: parent.left
+    anchors.top: raceComboBox.bottom
+    margin-top: 8
+
+  SpinBox
+    id: experienceText
+    width: 120
+    anchors.left: experienceLabel.right
+    anchors.top: raceComboBox.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 999999999999
+    focusable: true
+    buttons: false
+
+  Label
+    id: skullLabel
+    width: 120
+    !text: tr('Skull:')
+    phantom: false
+    !tooltip: tr('Choose skulls type for your monster to have.\nSet "none" to don\'t set skull.')
+    anchors.left: parent.left
+    anchors.top: experienceText.bottom
+    margin-top: 8
+
+  ComboBox
+    id: skullComboBox
+    width: 120
+    anchors.left: skullLabel.right
+    anchors.top: experienceText.bottom
+    margin-top: 5
+    mouse-scroll: false
+
+  Label
+    id: speedLabel
+    width: 120
+    !text: tr('Speed:')
+    phantom: false
+    !tooltip: tr('Choose speed for your monster.\nSet it to "0" means your monster won\'t move at all.')
+    anchors.left: parent.left
+    anchors.top: skullComboBox.bottom
+    margin-top: 8
+
+  SpinBox
+    id: speedText
+    width: 120
+    anchors.left: speedLabel.right
+    anchors.top: skullComboBox.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 999999999999
+    focusable: true
+    buttons: false
+
+  Label
+    id: manacostLabel
+    width: 120
+    !text: tr('Mana cost:')
+    phantom: false
+    !tooltip: tr('You can configure mana cost needed for the summon of this monster.\nYou need to turn on flag "summonable" or "convinceable".')
+    anchors.left: parent.left
+    anchors.top: speedText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: manacostText
+    width: 120
+    anchors.left: manacostLabel.right
+    anchors.top: speedText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 999999999999
+    focusable: true
+    buttons: false
+
+//Health
+
+  Label
+    id: healthLabel
+    width: 100
+    !text: tr('Health:')
+    phantom: false
+    !tooltip: ('Set health points for your monster.')
+    anchors.left: parent.left
+    anchors.top: manacostText.bottom
+    margin-top: 8
+
+  Label
+    id: healthnowLabel
+    width: 50
+    !text: tr('Now:')
+    phantom: false
+    !tooltip: tr('How much health points will have monster when he spawned.')
+    anchors.left: healthLabel.right
+    anchors.top: manacostText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: healthnowText
+    width: 120
+    anchors.left: healthnowLabel.right
+    anchors.top: manacostText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 999999999999
+    focusable: true
+    buttons: false
+
+  Label
+    id: healthmaxLabel
+    width: 50
+    !text: tr('Max:')
+    phantom: false
+    !tooltip: tr('Maximum health points of monster.\nThis value needs to be equal or greater than in "Now".')
+    anchors.left: healthnowText.right
+    anchors.top: manacostText.bottom
+    margin-top: 8
+    margin-left: 10
+
+  SpinBox
+    id: healthmaxText
+    width: 120
+    anchors.left: healthmaxLabel.right
+    anchors.top: manacostText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 999999999999
+    focusable: true
+    buttons: false
+
+//Looktype
+
+  CheckBox
+    id: lookTypeCheckBox
+    text: Look Type
+    phantom: false
+    !tooltip: tr('This is where you set up outfit of your monster.')
+    anchors.left: parent.left
+    anchors.top: healthnowText.bottom
+    width: 120
+    margin-top: 8
+
+  CheckBox
+    id: lookTypeExCheckBox
+    text: Look TypeEx
+    phantom: false
+    !tooltip: tr('This is where you set up outfit from item id for your monster.\nFor example for id "3031", your monster look like "Gold Coin".')
+    anchors.left: lookTypeCheckBox.right
+    anchors.top: healthnowText.bottom
+    width: 120
+    margin-top: 8
+
+  SpinBox
+    id: lookTypeText
+    width: 120
+    anchors.left: lookTypeExCheckBox.right
+    anchors.top: healthnowText.bottom
+    margin-top: 5
+    minimum: 1
+    maximum: 999999999999
+    focusable: true
+    buttons: true
+
+//Head, Body, Legs, Feet
+
+  Label
+    id: headLabel
+    width: 60
+    !text: tr('Head:')
+    phantom: false
+    !tooltip: tr('Choose color id for head.\nWorks only if monster has outfit which can be edited with colors like player outfits.')
+    anchors.left: parent.left
+    anchors.top: lookTypeText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: headText
+    width: 50
+    anchors.left: headLabel.right
+    anchors.top: lookTypeText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 132
+    focusable: true
+    buttons: true
+
+  Label
+    id: bodyLabel
+    width: 60
+    !text: tr('Body:')
+    phantom: false
+    !tooltip: tr('Choose color id for body.\nWorks only if monster has outfit which can be edited with colors like player outfits.')
+    anchors.left: headText.right
+    anchors.top: lookTypeText.bottom
+    margin-top: 8
+    margin-left: 10
+
+  SpinBox
+    id: bodyText
+    width: 50
+    anchors.left: bodyLabel.right
+    anchors.top: lookTypeText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 132
+    focusable: true
+    buttons: true
+
+  Label
+    id: legsLabel
+    width: 60
+    !text: tr('Legs:')
+    phantom: false
+    !tooltip: tr('Choose color id for legs.\nWorks only if monster has outfit which can be edited with colors like player outfits.')
+    anchors.left: bodyText.right
+    anchors.top: lookTypeText.bottom
+    margin-top: 8
+    margin-left: 10
+
+  SpinBox
+    id: legsText
+    width: 50
+    anchors.left: legsLabel.right
+    anchors.top: lookTypeText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 132
+    focusable: true
+    buttons: true
+
+  Label
+    id: feetLabel
+    width: 60
+    !text: tr('Feet:')
+    phantom: false
+    !tooltip: tr('Choose color id for feet.\nWorks only if monster has outfit which can be edited with colors like player outfits.')
+    anchors.left: legsText.right
+    anchors.top: lookTypeText.bottom
+    margin-top: 8
+    margin-left: 10
+
+  SpinBox
+    id: feetText
+    width: 50
+    anchors.left: feetLabel.right
+    anchors.top: lookTypeText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 132
+    focusable: true
+    buttons: true
+
+//Addons and Mount
+
+  Label
+    id: addonsLabel
+    width: 60
+    !text: tr('Addons:')
+    phantom: false
+    !tooltip: tr('You can type addons for your monster.\n"0" means no addons, "1" means first addon, "2" means second addon, "3" means both addons.\nWorks only if monster has outfit which can be edited with addons.')
+    anchors.left: parent.left
+    anchors.top: headText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: addonsText
+    width: 120
+    anchors.left: addonsLabel.right
+    anchors.top: headText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 3
+    focusable: true
+    buttons: true
+
+  Label
+    id: mountLabel
+    width: 60
+    !text: tr('Mount:')
+    phantom: false
+    !tooltip: tr('You can type mount for your creature.\nType mount="0" if you don\'t want your monster to have any mounts.')
+    anchors.left: addonsText.right
+    anchors.top: headText.bottom
+    margin-top: 8
+    margin-left: 10
+
+  SpinBox
+    id: mountText
+    width: 120
+    anchors.left: mountLabel.right
+    anchors.top: headText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 999999
+    focusable: true
+    buttons: true
+
+//Corpse
+
+  Label
+    id: corpseLabel
+    width: 60
+    !text: tr('Corpse:')
+    phantom: false
+    !tooltip: tr('Set monster corpse.\nIf you want your monster to have any loot, set only containers.')
+    anchors.left: parent.left
+    anchors.top: addonsText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: corpseText
+    width: 120
+    anchors.left: corpseLabel.right
+    anchors.top: addonsText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 999999
+    focusable: true
+    buttons: false
+
+//Targetchange
+
+  Label
+    id: targetchangeLabel
+    width: 110
+    !text: tr('Targetchange:')
+    phantom: false
+    !tooltip: tr('You can set up monster retarget.')
+    anchors.left: parent.left
+    anchors.top: corpseText.bottom
+    margin-top: 8
+
+  Label
+    id: intervalLabel
+    width: 75
+    !text: tr('Interval:')
+    phantom: false
+    !tooltip: tr('How often it will try to change it\'s target (in milliseconds).')
+    anchors.left: targetchangeLabel.right
+    anchors.top: corpseText.bottom
+    margin-top: 8
+
+  SpinBox
+    id: intervalText
+    width: 120
+    anchors.left: intervalLabel.right
+    anchors.top: corpseText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 999999
+    focusable: true
+    buttons: false
+
+  Label
+    id: chanceLabel
+    width: 75
+    !text: tr('Chance:')
+    phantom: false
+    !tooltip: tr('It\'s the chance to retarget successfully.\nPut "0" if you don\'t want your monster to retarget at all.')
+    anchors.left: intervalText.right
+    anchors.top: corpseText.bottom
+    margin-top: 8
+    margin-left: 10
+
+  SpinBox
+    id: chanceText
+    width: 120
+    anchors.left: chanceLabel.right
+    anchors.top: corpseText.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 999999
+    focusable: true
+    buttons: false
+
+//Strategy
+
+  CheckBox
+    id: strategyCheckBox
+    text: Strategy
+    !tooltip: tr('This is responsible for monster behavior')
+    anchors.left: parent.left
+    anchors.top: intervalText.bottom
+    width: 120
+    margin-top: 8
+    @onCheckChange: |
+      if self:isChecked() then
+        modules.tool_monstermaker.valuesTable.strategy:setEnabled(true)
+        modules.tool_monstermaker.monsterPanel:recursiveGetChildById('strategyattackLabel'):setEnabled(true)
+        modules.tool_monstermaker.monsterPanel:recursiveGetChildById('strategydefenseLabel'):setEnabled(true)
+      else
+        modules.tool_monstermaker.valuesTable.strategy:setEnabled(false)
+        modules.tool_monstermaker.monsterPanel:recursiveGetChildById('strategyattackLabel'):setEnabled(false)
+        modules.tool_monstermaker.monsterPanel:recursiveGetChildById('strategydefenseLabel'):setEnabled(false)
+      end
+
+  Label
+    id: strategyattackLabel
+    phantom: false
+    !tooltip: tr('If more, there is more focused on attack.')
+    width: 120
+    anchors.left: parent.left
+    anchors.top: strategyCheckBox.bottom
+    margin-top: 8
+
+  Label
+    id: strategydefenseLabel
+    phantom: false
+    !tooltip: tr('If more, there is more focused on defence.')
+    width: 120
+    anchors.left: strategyattackLabel.right
+    anchors.top: strategyCheckBox.bottom
+    margin-top: 8
+
+  OptionScrollbar
+    id: strategyScrollbar
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: strategyattackLabel.bottom
+    margin-top: 5
+    minimum: 0
+    maximum: 100
+    @onValueChange: |
+      modules.tool_monstermaker.monsterPanel:recursiveGetChildById('strategyattackLabel'):setText(tr('Attack: %s', self:getValue()))
+      modules.tool_monstermaker.monsterPanel:recursiveGetChildById('strategydefenseLabel'):setText(tr('Defense: %s', 100 - self:getValue()))
+
+//Monster Widget
+
+  Creature
+    id: monsterPreview
+    phantom: true
+    anchors.top: parent.top
+    anchors.right: parent.right
+    height: 150
+    width: 150
+    margin-top: 5
+    margin-right: 5
